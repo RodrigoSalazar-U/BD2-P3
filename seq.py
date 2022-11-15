@@ -29,7 +29,7 @@ class SequentialFile():
 	# ------------------------------------------------
 	#                  OPERATIONS
 	# ------------------------------------------------
-	def KNNSearch(data,q,k):
+	def KNNSearch(q,k):
 		result = []
 		for (filename, imgvec) in self.read_seqfile():
 			dist = - get_image_distance(q,imgvec) # Dist negativa para convertir min heap a max heap
@@ -44,7 +44,7 @@ class SequentialFile():
 		result.sort(key=lambda tup : tup[1])
 		return result
 
-	def RangeSearch(data,q,radius):
+	def RangeSearch(q,radius):
 		result = []
 		for (filename, imgvec) in self.read_seqfile():
 			dist = get_image_distance(q,imgvec) # Dist negativa para convertir min heap a max heap
@@ -52,9 +52,5 @@ class SequentialFile():
 				result.append( ((filename, imgvec), dist) )
 		result.sort(key=lambda tup : tup[1])
 		return result
-
-
-
-
 
 
