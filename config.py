@@ -1,5 +1,5 @@
 
-IMG_LIST = "imagels.txt"
+IMG_LIST = "images.txt"
 DB_FOLDER = "DB"
 
 SEQUENTIAL_FILE       = f"{DB_FOLDER}/seq.db"

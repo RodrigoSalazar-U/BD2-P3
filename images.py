@@ -7,8 +7,9 @@ def ImageLoader(image_list_file):
     """
     with open(image_list_file) as f:
         for filename in f:
-            imgvec = get_image_vector(filename.strip("\n"))
-            if imgvec:
+            filename = filename.strip("\n")
+            imgvec = get_image_vector(filename)
+            if imgvec is not None:
                 yield (filename, imgvec)
 
 def get_image_vector(filename):
@@ -26,5 +27,9 @@ def get_image_distance(vec1, vec2):
     """
     Funcion para calcular distancia entre dos vectores caracteristicos
     """
-    dist = face_recognition.face_distance(known_face_encodings, face_encoding)
+    dist = face_recognition.face_distance((vec1,), vec2)
     return dist
+
+if __name__=="__main__":
+    for i in ImageLoader("images.txt"):
+        print(i)
