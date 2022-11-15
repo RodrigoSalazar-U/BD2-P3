@@ -1,5 +1,8 @@
 import rtree
-import .config
+import os
+import numpy as np
+from config import *
+from images import ImageLoader, get_image_distance, get_image_vector
 
 class RtreeStruct():
     def __init__(self):
@@ -20,21 +23,28 @@ class RtreeStruct():
         # load data
         self.load_data()
 
-    # ------------------------------------------------
-	#                   LOAD DATA
-	# ------------------------------------------------
-    def load_data(self):
-        # Load img vectors to rtree
-		for filename, imgvec in ImageLoader(IMG_LIST):
-			self.ind.insert(filename, imgvec)
 
     # ------------------------------------------------
-	#                   OPERATIONS
-	# ------------------------------------------------
-	def KNNSearch(q,k):
-        return self.ind.nearest(q, num_results=k)
+    #                   LOAD DATA
+    # ------------------------------------------------
+    def load_data(self):
+        # Load img vectors to rtree
+        count = 0
+        for filename, imgvec in ImageLoader(IMG_LIST):
+            count += 1
+            self.ind.insert(count, imgvec, obj=filename)
+
+
+    # ------------------------------------------------
+    #                   OPERATIONS
+    # ------------------------------------------------
+    def KNNSearch(self,q,k):
+        result = self.ind.nearest(q, num_results=k, objects=True)
+        result = [((item.object, item.bbox[0:128]),ED(np.array(q), np.array(item.bbox[0:128]))) for item in result]
+        result.sort(key=lambda tup : tup[1])
+        return result
     
-    def RangeSearch(q,radius):
+    def RangeSearch(self,q,radius):
         result = []
         bottom = [i - radius for i in q]
         top    = [i + radius for i in q]
@@ -42,9 +52,27 @@ class RtreeStruct():
 
         upperbound = self.ind.intersection( tuple(MBB), objects=True )
         for item in upperbound:
-            dist = ED(np.array(q), np.array(item.mbb))
+            mbb = item.bbox[0:128]
+            dist = ED(np.array(q), np.array(mbb))
             if ( dist <= radius):
-                result.append(((item.id, item.bbox), dist))
+                result.append(((item.object, mbb), dist))
 
         result.sort(key=lambda tup : tup[1])
         return result
+
+if __name__=="__main__":
+    db = RtreeStruct()
+    q = get_image_vector('data/lfw/Azra_Akin/Azra_Akin_0001.jpg')
+
+    print("----------")
+    print("TEST KNN")
+    result = db.KNNSearch(q,3)
+    for i in result:
+        print(i[0][0])
+
+    print("----------")
+    print("TEST RANGE")
+    result = db.RangeSearch(q,0.7)
+    for i in result:
+        print(i[0][0])
+
