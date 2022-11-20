@@ -11,7 +11,7 @@ class RtreeStruct():
         prop = rtree.index.Property()
         prop.dimension = 128
         prop.buffering_capacity = 4 # M, m = M/2
-        prop.dat_extension = RTREE_DATA_EXTENSION
+        prop.dat_extension = RTREE_DATA_EXTENSION 
         prop.idx_extension = RTREE_INDEX_EXTENSION
         # Eliminar los archivos
         if os.path.exists(RTREE_DATAFILE):
