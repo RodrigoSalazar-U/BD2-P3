@@ -1,4 +1,7 @@
 import math
+import json
+import subprocess
+import argparse
 import os
 import numpy as np
 from config import *
@@ -20,7 +23,7 @@ class KDTree():
     def load_data(self):
         arreglo = []
         arreglo_name = []
-        for nombre, imgvec in ImageLoader(IMG_LIST):
+        for nombre, imgvec in ImageLoader(IMG_LIST, MAX_NUMBER_ENTRIES):
             arreglo_name.append(str(nombre))
             arreglo.append(imgvec)
         arbolito = spatial.KDTree(arreglo)
@@ -50,15 +53,22 @@ class KDTree():
         
 if __name__ == '__main__':
     arbolito = KDTree()
-    q = get_image_vector('data/lfw/Azra_Akin/Azra_Akin_0001.jpg')
+    #q = get_image_vector('data/lfw/Azra_Akin/Azra_Akin_0001.jpg')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n","--number",help="Number")
+    parser.add_argument("-f","--filename",help="Filename")
+    args = vars(parser.parse_args())
 
-    print('-----------')
-    print('TEST KNN')
-    result, nombres = arbolito.KNN_search_arbolito(q,3)
+    q = get_image_vector(args['filename'])
+
+
+    #print('-----------')
+    #print('TEST KNN')
+    result, nombres = arbolito.KNN_search_arbolito(q,int(args['number']))
     print(nombres)
 
-    print('------------')
-    print('RANGE SEARCH')
-    result2, nombres2 = arbolito.range_search_arbolito(q,0.7)
-    print(nombres2)
+    #print('------------')
+    #print('RANGE SEARCH')
+    #result2, nombres2 = arbolito.range_search_arbolito(q,0.7)
+    #print(nombres2)
     

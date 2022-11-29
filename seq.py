@@ -1,5 +1,7 @@
 import os
 import json
+import subprocess
+import argparse
 import heapq
 import numpy as np
 from itertools import count
@@ -9,7 +11,10 @@ from images import ImageLoader, get_image_distance, get_image_vector
 ### SEQUENTIAL
 class SequentialFile():
     def __init__(self, force=True):
-        if (force or not os.path.exists(SEQUENTIAL_FILE)):
+        if (force and os.path.exists(SEQUENTIAL_FILE)):
+            os.remove(SEQUENTIAL_FILE)
+
+        if (not os.path.exists(SEQUENTIAL_FILE)):
             self.init_seqfile()
 
     # ------------------------------------------------
@@ -18,7 +23,7 @@ class SequentialFile():
     def init_seqfile(self):
         count = 0
         ### Create Sequential File
-        for filename, imgvec in ImageLoader(IMG_LIST):
+        for filename, imgvec in ImageLoader(IMG_LIST, MAX_NUMBER_ENTRIES):
             with open(SEQUENTIAL_FILE, 'a') as f:
                 print(f"DEBUG: SeqFile - #{count} : {filename}")
                 count += 1
@@ -65,17 +70,26 @@ class SequentialFile():
         return result
 
 if __name__=="__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n","--number",help="Number")
+    parser.add_argument("-f","--filename",help="Filename")
+    args = vars(parser.parse_args())
+
+
+
     db = SequentialFile(force=False)
-    q = get_image_vector('data/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
+    q = get_image_vector(args['filename'])
 
-    print("----------")
-    print("TEST KNN")
-    result = db.KNNSearch(q,4)
-    for (filename, _), dist in result:
-        print(f"FILE:{filename} <> DIST:{dist}")
+    #q = get_image_vector('data/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
 
-    print("----------")
-    print("TEST RANGE")
-    result = db.RangeSearch(q,0.7)
+    #print("TEST KNN")
+    result = db.KNNSearch(q,int(args['number']))
     for (filename, _), dist in result:
-        print(f"FILE:{filename} <> DIST:{dist}")
+        print(f"{filename} {dist}")
+
+    #print("----------")
+    #print("TEST RANGE")
+    #result = db.RangeSearch(q,0.7)
+    #for (filename, _), dist in result:
+    #    print(f"FILE:{filename} <> DIST:{dist}")

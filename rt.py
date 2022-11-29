@@ -1,4 +1,7 @@
 import rtree
+import json
+import subprocess
+import argparse
 import os
 import numpy as np
 from config import *
@@ -30,7 +33,7 @@ class RtreeStruct():
     def load_data(self):
         # Load img vectors to rtree
         count = 0
-        for filename, imgvec in ImageLoader(IMG_LIST):
+        for filename, imgvec in ImageLoader(IMG_LIST, MAX_NUMBER_ENTRIES):
             count += 1
             self.ind.insert(count, imgvec, obj=filename)
 
@@ -61,19 +64,29 @@ class RtreeStruct():
         return result
 
 if __name__=="__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n","--number",help="Number")
+    parser.add_argument("-f","--filename",help="Filename")
+    args = vars(parser.parse_args())
+
+
     db = RtreeStruct()
-    q = get_image_vector('data/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
+    q = get_image_vector(args['filename'])
+
+
+    #q = get_image_vector('data/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
     #q = get_image_vector('https://storage.cloud.google.com/bd3-proyecto/ROSTROS/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
 
-    print("----------")
-    print("TEST KNN")
-    result = db.KNNSearch(q,3)
+    #print("----------")
+    #print("TEST KNN")
+    result = db.KNNSearch(q,int(args['number']))
     for i in result:
         print(i[0][0])
-
+'''
     print("----------")
     print("TEST RANGE")
     result = db.RangeSearch(q,0.7)
     for i in result:
         print(i[0][0])
-
+'''
