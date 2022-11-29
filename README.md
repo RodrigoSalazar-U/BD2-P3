@@ -151,6 +151,10 @@ Se realizaron 3 pruebas, cada una con un respectivo algoritmo KNN-RTree, KNN-sec
 | N = 6400  |                |           |           |
 | N = 12800 |                |           |           |
 
+![alt text](graphics/knn.png "log(N/100) imágenes")
+
+![alt text](graphics/knn-8.png "N imágenes")
+
 #### Aplicación web
 
 // Frontend explicacion
