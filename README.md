@@ -158,7 +158,7 @@ Los resultados expuestos en la grafica 1 nos muestran la diferencia en realizar 
 Si bien los algoritmos de RTree y HighD tienen resultados comparables, HighD tiene un mejor rendimiento en general que se hace mas evidente a medida que incrementa el numero de elementos en la estructura.
 
 ![alt text](graphics/knn-8.png "N imágenes")
-La grafica 2 nos muestra los mismos resultados pero expuestos en una escala logaritmica. De esta forma, podemos apreciar mejor las diferencias expuestas previamente: HighD tiene la mejor peformance, seguido de RTree que tiene resultados comparables hasta que se llega a elevados valores de N donde se hace mas evidente la diferencia y por ultimo el secuencial que, al tener que recorrer todos los elementos, tiene una complejidad elevada y de crecimiento lineal.
+La grafica 2 nos muestra los mismos resultados pero expuestos en una escala logaritmica. De esta forma, podemos apreciar mejor las diferencias expuestas previamente: HighD tiene la mejor peformance, seguido de RTree que tiene resultados comparables hasta que se llega a elevados valores de N donde se hace mas evidente la diferencia y por ultimo el secuencial que, al tener que recorrer todos los elementos, tiene una complejidad elevada y de crecimiento lineal. Cabe destacar sin embargo que, como el KDTree esta en memoria principal mientras que el RTree se encuentra en memoria secundaria, esta resula una comparación un poco injusta. Ello se podria solucionar extendiendo la implementación del KDtree para trabajar sobre memoria secundaria, adicionalmente que incrementaria su escalabilidad.
 
 #### Aplicación web
 
