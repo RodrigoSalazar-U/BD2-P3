@@ -140,16 +140,16 @@ Consiste en explícitamente intentar modelar la diferencia entre las clases de d
 Se realizaron 3 pruebas, cada una con un respectivo algoritmo KNN-RTree, KNN-secuencial y el KNN-HighD sobre una colección de objetos de tamaño N y el valor constante de k = 8. Se comparó los resultados en la siguiente tabla:
 
 
-|           | KNN-Secuencial | KNN-RTree | KNN-HighD |
-|-----------|----------------|-----------|-----------|
-| N = 100   |                |           |           |
-| N = 200   |                |           |           |
-| N = 400   |                |           |           |
-| N = 800   |                |           |           |
-| N = 1600  |                |           |           |
-| N = 3200  |                |           |           |
-| N = 6400  |                |           |           |
-| N = 12800 |                |           |           |
+|     N     | KNN-Secuencial      | KNN-RTree           | KNN-HighD            |
+|-----------|---------------------|---------------------|----------------------|
+| N = 100   | 0.00567150115966797 | 0.00113177299499512 | 0.000110864639282227 |
+| N = 200   | 0.0111401081085205  | 0.00138974189758301 | 0.00011444091796875  |
+| N = 400   | 0.0216867923736572  | 0.00223731994628906 | 0.000135898590087891 |
+| N = 800   | 0.0427703857421875  | 0.00290298461914062 | 0.000157356262207031 |
+| N = 1600  | 0.0878100395202637  | 0.0038764476776123  | 0.000223636627197266 |
+| N = 3200  | 0.171669721603394   | 0.00756597518920898 | 0.000354528427124023 |
+| N = 6400  | 0.339271306991577   | 0.0150580406188965  | 0.000608682632446289 |
+| N = 12800 | 0.666930675506592   | 0.0322513580322266  | 0.00148487091064453  |
 
 ![alt text](graphics/knn.png "log(N/100) imágenes")
 
@@ -157,7 +157,9 @@ Se realizaron 3 pruebas, cada una con un respectivo algoritmo KNN-RTree, KNN-sec
 
 #### Aplicación web
 
-// Frontend explicacion
+### Telegram
+Se implementó un bot en Telegram que se conecta a la base de datos para obtener los resultados de las queries. En este caso se le envía una imágen y el algoritmo a usar, y el bot en respuesta nos da los K rostros más parecidos y nos envía estas imágenes, siendo una por mensaje. Cabe recalcar que la implementación en python 
+se encuentra en google cloud.
 
 // Imagen de la interfaz
 
