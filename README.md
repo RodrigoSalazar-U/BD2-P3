@@ -140,20 +140,31 @@ Consiste en explícitamente intentar modelar la diferencia entre las clases de d
 Se realizaron 3 pruebas, cada una con un respectivo algoritmo KNN-RTree, KNN-secuencial y el KNN-HighD sobre una colección de objetos de tamaño N y el valor constante de k = 8. Se comparó los resultados en la siguiente tabla:
 
 
-|           | KNN-Secuencial | KNN-RTree | KNN-HighD |
-|-----------|----------------|-----------|-----------|
-| N = 100   |                |           |           |
-| N = 200   |                |           |           |
-| N = 400   |                |           |           |
-| N = 800   |                |           |           |
-| N = 1600  |                |           |           |
-| N = 3200  |                |           |           |
-| N = 6400  |                |           |           |
-| N = 12800 |                |           |           |
+|     N     | KNN-Secuencial      | KNN-RTree           | KNN-HighD            |
+|-----------|---------------------|---------------------|----------------------|
+| N = 100   | 0.00567150115966797 | 0.00113177299499512 | 0.000110864639282227 |
+| N = 200   | 0.0111401081085205  | 0.00138974189758301 | 0.00011444091796875  |
+| N = 400   | 0.0216867923736572  | 0.00223731994628906 | 0.000135898590087891 |
+| N = 800   | 0.0427703857421875  | 0.00290298461914062 | 0.000157356262207031 |
+| N = 1600  | 0.0878100395202637  | 0.0038764476776123  | 0.000223636627197266 |
+| N = 3200  | 0.171669721603394   | 0.00756597518920898 | 0.000354528427124023 |
+| N = 6400  | 0.339271306991577   | 0.0150580406188965  | 0.000608682632446289 |
+| N = 12800 | 0.666930675506592   | 0.0322513580322266  | 0.00148487091064453  |
+
+
+![alt text](graphics/knn.png "log(N/100) imágenes")
+Los resultados expuestos en la grafica 1 nos muestran la diferencia en realizar la busqueda de los K vecinos mas cercanos utilizando las tres tecnicas implementadas. Como se puede observar, el algoritmo secuencial tiene una complejidad lineal con crecimiento de mayor rapidez que los metodos indexados por ordenes de magnitud (1 orden con RTree y 2 con HighD).
+
+Si bien los algoritmos de RTree y HighD tienen resultados comparables, HighD tiene un mejor rendimiento en general que se hace mas evidente a medida que incrementa el numero de elementos en la estructura.
+
+![alt text](graphics/knn-8.png "N imágenes")
+La grafica 2 nos muestra los mismos resultados pero expuestos en una escala logaritmica. De esta forma, podemos apreciar mejor las diferencias expuestas previamente: HighD tiene la mejor peformance, seguido de RTree que tiene resultados comparables hasta que se llega a elevados valores de N donde se hace mas evidente la diferencia y por ultimo el secuencial que, al tener que recorrer todos los elementos, tiene una complejidad elevada y de crecimiento lineal. Cabe destacar sin embargo que, como el KDTree esta en memoria principal mientras que el RTree se encuentra en memoria secundaria, esta resulta una comparación un poco injusta. Ello se podria solucionar extendiendo la implementación del KDtree para trabajar sobre memoria secundaria, adicionalmente que incrementaria su escalabilidad.
 
 #### Aplicación web
 
-// Frontend explicacion
+### Telegram
+Se implementó un bot en Telegram que se conecta a la base de datos para obtener los resultados de las queries. En este caso se le envía una imágen y el algoritmo a usar, y el bot en respuesta nos da los K rostros más parecidos y nos envía estas imágenes, siendo una por mensaje. Cabe recalcar que la implementación en python 
+se encuentra en google cloud.
 
-// Imagen de la interfaz
+![alt text](graphics/telegram.jfif "Aplicación web")
 
