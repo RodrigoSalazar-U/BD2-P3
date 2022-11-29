@@ -7,6 +7,14 @@
 - Ponce Contreras, Luis Eduardo
 - Lapa Carhuamaca, Arleth Ivhy
 
+**CUADRO DE ACTIVIDADES**
+
+|    NOMBRE         |  ACTIVIDAD |
+| ----------- | ----------------- |
+| Rodrigo Salazar     | Implementación KNN-Sequential y KNN-Rtree               |
+| Juan Sara              | Implementación KNN-HighD          |
+| Luis Ponce             | Implementación Frontend y Cloud    |
+| Arleth Lapa            | Implementacion Backend y Experimentación |
 ---
 # Proyecto 3 | Bases de Datos Multimedia
 
