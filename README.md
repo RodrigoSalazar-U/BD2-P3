@@ -154,5 +154,6 @@ Se realizaron 3 pruebas, cada una con un respectivo algoritmo KNN-RTree, KNN-sec
 #### Aplicación web
 
 // Frontend explicacion
+
 // Imagen de la interfaz
 
