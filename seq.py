@@ -66,11 +66,11 @@ class SequentialFile():
 
 if __name__=="__main__":
     db = SequentialFile(force=False)
-    q = get_image_vector('data/lfw/Azra_Akin/Azra_Akin_0001.jpg')
+    q = get_image_vector('data/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
 
     print("----------")
     print("TEST KNN")
-    result = db.KNNSearch(q,3)
+    result = db.KNNSearch(q,4)
     for (filename, _), dist in result:
         print(f"FILE:{filename} <> DIST:{dist}")
 

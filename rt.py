@@ -62,7 +62,8 @@ class RtreeStruct():
 
 if __name__=="__main__":
     db = RtreeStruct()
-    q = get_image_vector('data/lfw/Azra_Akin/Azra_Akin_0001.jpg')
+    q = get_image_vector('data/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
+    #q = get_image_vector('https://storage.cloud.google.com/bd3-proyecto/ROSTROS/Aaron_Eckhart/Aaron_Eckhart_0001.jpg')
 
     print("----------")
     print("TEST KNN")

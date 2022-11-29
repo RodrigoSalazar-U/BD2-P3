@@ -1,4 +1,6 @@
 import face_recognition
+import requests
+import urllib.request
 
 def ImageLoader(image_list_file):
     """
@@ -17,6 +19,7 @@ def get_image_vector(filename):
     Funcion para extraer el vector caracteristico de una imagen
     """
     loaded_image = face_recognition.load_image_file(filename)
+    #loaded_image = face_recognition.load_image_file(urllib.request.urlopen(filename))
     face_encoding = face_recognition.face_encodings(loaded_image)
     if face_encoding:
         return face_encoding[0]
