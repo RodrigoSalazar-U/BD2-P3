@@ -152,13 +152,13 @@ Se realizaron 3 pruebas, cada una con un respectivo algoritmo KNN-RTree, KNN-sec
 | N = 12800 | 0.666930675506592   | 0.0322513580322266  | 0.00148487091064453  |
 
 
+![alt text](graphics/knn.png "log(N/100) imágenes")
+Los resultados expuestos en la grafica 1 nos muestran la diferencia en realizar la busqueda de los K vecinos mas cercanos utilizando las tres tecnicas implementadas. Como se puede observar, el algoritmo secuencial tiene una complejidad lineal con crecimiento de mayor rapidez que los metodos indexados por ordenes de magnitud (1 orden con RTree y 2 con HighD).
+
+Si bien los algoritmos de RTree y HighD tienen resultados comparables, HighD tiene un mejor rendimiento en general que se hace mas evidente a medida que incrementa el numero de elementos en la estructura.
 
 ![alt text](graphics/knn-8.png "N imágenes")
-
-Los resultados mostrados en la grafica 1 muestran las ventajas de usar indices para la busqueda de los K vecinos mas cercanos: los indices RTree y HighD tienen una performance ordenes de magnitud mejores que el algoritmo secuencial.
-
-![alt text](graphics/knn.png "log(N/100) imágenes")
-
+La grafica 2 nos muestra los mismos resultados pero expuestos en una escala logaritmica. De esta forma, podemos apreciar mejor las diferencias expuestas previamente: HighD tiene la mejor peformance, seguido de RTree que tiene resultados comparables hasta que se llega a elevados valores de N donde se hace mas evidente la diferencia y por ultimo el secuencial que, al tener que recorrer todos los elementos, tiene una complejidad elevada y de crecimiento lineal.
 
 #### Aplicación web
 
