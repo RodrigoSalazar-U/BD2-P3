@@ -151,9 +151,14 @@ Se realizaron 3 pruebas, cada una con un respectivo algoritmo KNN-RTree, KNN-sec
 | N = 6400  | 0.339271306991577   | 0.0150580406188965  | 0.000608682632446289 |
 | N = 12800 | 0.666930675506592   | 0.0322513580322266  | 0.00148487091064453  |
 
-![alt text](graphics/knn.png "log(N/100) imágenes")
+
 
 ![alt text](graphics/knn-8.png "N imágenes")
+
+Los resultados mostrados en la grafica 1 muestran las ventajas de usar indices para la busqueda de los K vecinos mas cercanos: los indices RTree y HighD tienen una performance ordenes de magnitud mejores que el algoritmo secuencial.
+
+![alt text](graphics/knn.png "log(N/100) imágenes")
+
 
 #### Aplicación web
 
