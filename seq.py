@@ -9,7 +9,10 @@ from images import ImageLoader, get_image_distance, get_image_vector
 ### SEQUENTIAL
 class SequentialFile():
     def __init__(self, force=True):
-        if (force or not os.path.exists(SEQUENTIAL_FILE)):
+        if (force and os.path.exists(SEQUENTIAL_FILE)):
+            os.remove(SEQUENTIAL_FILE)
+
+        if (not os.path.exists(SEQUENTIAL_FILE)):
             self.init_seqfile()
 
     # ------------------------------------------------
@@ -18,7 +21,7 @@ class SequentialFile():
     def init_seqfile(self):
         count = 0
         ### Create Sequential File
-        for filename, imgvec in ImageLoader(IMG_LIST):
+        for filename, imgvec in ImageLoader(IMG_LIST, MAX_NUMBER_ENTRIES):
             with open(SEQUENTIAL_FILE, 'a') as f:
                 print(f"DEBUG: SeqFile - #{count} : {filename}")
                 count += 1

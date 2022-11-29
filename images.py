@@ -1,13 +1,13 @@
 import face_recognition
 
-def ImageLoader(image_list_file):
+def ImageLoader(image_list_file, num_entries):
     """
     Generador para extraer todos los vectores caracterisitcos
     de una lista de archivos de imagenes
     """
     with open(image_list_file) as f:
-        for filename in f:
-            filename = filename.strip("\n")
+        for num in range(num_entries):
+            filename = next(f).strip("\n")
             imgvec = get_image_vector(filename)
             if imgvec is not None:
                 yield (filename, imgvec)
@@ -31,5 +31,5 @@ def get_image_distance(vec1, vec2):
     return dist
 
 if __name__=="__main__":
-    for i in ImageLoader("images.txt"):
+    for i in ImageLoader("images.txt",5):
         print(i)

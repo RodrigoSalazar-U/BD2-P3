@@ -20,7 +20,7 @@ class KDTree():
     def load_data(self):
         arreglo = []
         arreglo_name = []
-        for nombre, imgvec in ImageLoader(IMG_LIST):
+        for nombre, imgvec in ImageLoader(IMG_LIST, MAX_NUMBER_ENTRIES):
             arreglo_name.append(str(nombre))
             arreglo.append(imgvec)
         arbolito = spatial.KDTree(arreglo)

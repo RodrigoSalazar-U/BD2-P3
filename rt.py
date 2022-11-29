@@ -30,7 +30,7 @@ class RtreeStruct():
     def load_data(self):
         # Load img vectors to rtree
         count = 0
-        for filename, imgvec in ImageLoader(IMG_LIST):
+        for filename, imgvec in ImageLoader(IMG_LIST, MAX_NUMBER_ENTRIES):
             count += 1
             self.ind.insert(count, imgvec, obj=filename)
 
